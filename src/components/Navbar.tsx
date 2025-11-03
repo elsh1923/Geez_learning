@@ -79,7 +79,7 @@ const Navbar = () => {
       <div className="w-full grid grid-cols-3 items-center border-b border-white/10 bg-[#0b0b0b]/80 px-6 py-3 shadow-[0_0_20px_rgba(255,215,0,0.06)]">
         {/* Left: Brand */}
         <div className="flex items-center">
-          <Link href="/" className="bg-gradient-to-r from-yellow-300 to-yellow-500 bg-clip-text text-xl font-extrabold tracking-tight text-transparent">
+          <Link href="/" className="bg-gradient-to-r from-yellow-300 to-yellow-500 bg-clip-text text-xl font-extrabold tracking-tight text-transparent whitespace-nowrap">
             {t.brand}
           </Link>
         </div>

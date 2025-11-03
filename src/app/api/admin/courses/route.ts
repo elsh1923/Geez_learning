@@ -36,9 +36,35 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ message: "Course created successfully", course }, { status: 201 });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Create course error:", error);
-    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+    
+    // Handle old 'title' index error (from previous schema version)
+    if (error.code === 11000 && error.keyPattern?.title) {
+      try {
+        // Attempt to drop the old index
+        await Course.collection.dropIndex("title_1");
+        // Retry course creation
+        const course = await Course.create({
+          titleEn,
+          titleAm,
+          descriptionEn,
+          descriptionAm,
+          thumbnail: thumbnailUrl || "",
+          thumbnailPublicId: thumbnailPublicId || "",
+          createdBy: user._id,
+        });
+        return NextResponse.json({ message: "Course created successfully", course }, { status: 201 });
+      } catch (retryError: any) {
+        // If dropping index fails, provide helpful error message
+        return NextResponse.json({ 
+          message: "Database index error. Please drop the old 'title_1' index from the courses collection manually: db.courses.dropIndex('title_1')",
+          error: retryError.message 
+        }, { status: 500 });
+      }
+    }
+    
+    return NextResponse.json({ message: error.message || "Internal server error" }, { status: 500 });
   }
 }
 

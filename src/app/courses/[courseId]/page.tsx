@@ -151,21 +151,29 @@ export default function CourseModulesPage() {
                 >
                   {t.enroll}
                 </button>
-                <Link href={`/courses/${courseId}/modules`} className="rounded-full border border-white/15 bg-white/5 px-5 py-2 font-semibold text-gray-100 transition hover:border-yellow-400 hover:bg-yellow-400/10 hover:text-yellow-300">{t.viewModules}</Link>
+                <button
+                  onClick={() => {
+                    const modulesSection = document.getElementById('modules-section');
+                    modulesSection?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="rounded-full border border-white/15 bg-white/5 px-5 py-2 font-semibold text-gray-100 transition hover:border-yellow-400 hover:bg-yellow-400/10 hover:text-yellow-300"
+                >
+                  {t.viewModules}
+                </button>
               </div>
             </div>
           </div>
         </div>
 
         {/* Modules */}
-        <h2 className="mb-4 text-2xl font-semibold">{t.modules}</h2>
+        <h2 id="modules-section" className="mb-4 text-2xl font-semibold">{t.modules}</h2>
         {modules.length === 0 ? (
           <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-gray-300">{t.noModules}</div>
         ) : (
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {modules.map((module) => (
               <Link
-                href={`/modules/${module._id}/quizzes`}
+                href={`/modules/${module._id}`}
                 key={module._id}
                 className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition hover:bg-white/10 hover:shadow-[0_10px_40px_rgba(250,204,21,0.15)]"
               >

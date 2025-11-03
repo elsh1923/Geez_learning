@@ -96,7 +96,7 @@ export default function Home() {
       <div className="pointer-events-none absolute bottom-[-20rem] right-[-10rem] h-[40rem] w-[40rem] rounded-full bg-gradient-to-tr from-yellow-400/15 via-amber-300/10 to-transparent blur-3xl" />
 
       {/* Hero */}
-      <div className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-0 text-center">
+      <div className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-4 sm:px-6 md:px-8 text-center">
         {/* Decorative Ge'ez letter background */}
         <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
           <div className="absolute inset-0 bg-black/60" />
@@ -112,15 +112,15 @@ export default function Home() {
         </div>
 
         {/* Centered content container to keep layout consistent */}
-        <div className="w-full max-w-6xl px-6 mx-auto">
-          <h1 className="mb-6 animate-fade-up bg-gradient-to-b from-gray-100 to-gray-300 bg-clip-text text-5xl font-extrabold tracking-tight text-transparent drop-shadow sm:text-6xl">
+        <div className="w-full max-w-6xl px-6 mx-auto overflow-visible">
+          <h1 className="mb-6 animate-fade-up bg-gradient-to-b from-gray-100 to-gray-300 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent drop-shadow sm:text-5xl md:text-6xl break-words leading-[1.2] pb-2 overflow-visible">
             {t.welcome}
           </h1>
           <p className="mx-auto mb-10 max-w-2xl animate-fade-up text-lg text-gray-300 sm:text-xl [animation-delay:120ms]">
             {t.subtitle}
           </p>
           <Link
-            href="/login"
+            href="/register"
             className="inline-block animate-fade-up rounded-full bg-yellow-400 px-8 py-3 font-semibold text-black shadow-[0_0_25px_rgba(250,204,21,0.45)] ring-1 ring-yellow-300 transition hover:shadow-[0_0_45px_rgba(250,204,21,0.6)] hover:brightness-110 [animation-delay:200ms]"
           >
             {t.getStarted}
@@ -158,7 +158,7 @@ export default function Home() {
             </button>
           </div>
           <p className="mb-3 text-sm text-gray-400">{t.aiSubtitle}</p>
-          <div className="mb-2 max-h-64 space-y-2 overflow-y-auto">
+          <div className="mb-2 max-h-64 space-y-2 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             {messages.map((msg, idx) => (
               <div
                 key={idx}

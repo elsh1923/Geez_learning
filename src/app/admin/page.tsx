@@ -273,11 +273,11 @@ function AddCourse({ onCreated, token }: { onCreated: () => void; token: string 
       </div>
       <div>
         <label htmlFor="course-desc-en" className="mb-1 block">Description (English)</label>
-        <textarea id="course-desc-en" aria-label="Course description in English" placeholder="Course description in English" className="w-full rounded border border-white/15 bg-white/5 px-3 py-2" rows={4} value={descriptionEn} onChange={e => setDescriptionEn(e.target.value)} required />
+        <textarea id="course-desc-en" aria-label="Course description in English" placeholder="Course description in English" className="w-full rounded border border-white/15 bg-white/5 px-3 py-2 whitespace-pre-wrap" rows={4} value={descriptionEn} onChange={e => setDescriptionEn(e.target.value)} required />
       </div>
       <div>
         <label htmlFor="course-desc-am" className="mb-1 block">Description (Amharic)</label>
-        <textarea id="course-desc-am" aria-label="Course description in Amharic" placeholder="ኮርስ መግለጫ (አማርኛ)" className="w-full rounded border border-white/15 bg-white/5 px-3 py-2" rows={4} value={descriptionAm} onChange={e => setDescriptionAm(e.target.value)} required />
+        <textarea id="course-desc-am" aria-label="Course description in Amharic" placeholder="ኮርስ መግለጫ (አማርኛ)" className="w-full rounded border border-white/15 bg-white/5 px-3 py-2 whitespace-pre-wrap" rows={4} value={descriptionAm} onChange={e => setDescriptionAm(e.target.value)} required />
       </div>
       <div className="space-y-2">
         <label className="mb-1 block">Thumbnail</label>
@@ -491,7 +491,7 @@ function AddModuleForm({ courseId, onAdded, token }: { courseId: string; onAdded
       </div>
       <div>
         <label className="mb-1 block text-sm text-gray-300">Text Lesson (English)</label>
-        <textarea className="w-full rounded border border-white/15 bg-white/5 px-3 py-2" rows={6} placeholder="Write the lesson text here in English..." value={contentEn} onChange={e => setContentEn(e.target.value)} required />
+        <textarea className="w-full rounded border border-white/15 bg-white/5 px-3 py-2 whitespace-pre-wrap" rows={6} placeholder="Write the lesson text here in English..." value={contentEn} onChange={e => setContentEn(e.target.value)} required />
         <p className="mt-1 text-xs text-gray-400">Add your lesson content here. You can include explanations, examples, and notes.</p>
         <div className="mt-2 flex items-center gap-2">
           <button
@@ -529,7 +529,7 @@ function AddModuleForm({ courseId, onAdded, token }: { courseId: string; onAdded
       </div>
       <div>
         <label className="mb-1 block text-sm text-gray-300">Text Lesson (Amharic)</label>
-        <textarea className="w-full rounded border border-white/15 bg-white/5 px-3 py-2" rows={6} placeholder="የትምህርት ጽሑፍ እዚህ በአማርኛ ይጻፉ..." value={contentAm} onChange={e => setContentAm(e.target.value)} required />
+        <textarea className="w-full rounded border border-white/15 bg-white/5 px-3 py-2 whitespace-pre-wrap" rows={6} placeholder="የትምህርት ጽሑፍ እዚህ በአማርኛ ይጻፉ..." value={contentAm} onChange={e => setContentAm(e.target.value)} required />
         <p className="mt-1 text-xs text-gray-400">Add your lesson content here in Amharic. You can include explanations, examples, and notes.</p>
       </div>
       <div>
@@ -658,9 +658,9 @@ function ModuleItem({ module, token, reload }: { module: Module; token: string |
               <label className="mb-1 block text-sm text-gray-300">Title (Amharic)</label>
               <input aria-label="Module title in Amharic" className="w-full rounded border border-white/15 bg-white/5 px-3 py-2" value={titleAm} onChange={e => setTitleAm(e.target.value)} />
               <label className="mb-1 mt-2 block text-sm text-gray-300">Content (English)</label>
-              <textarea aria-label="Module content in English" className="w-full rounded border border-white/15 bg-white/5 px-3 py-2" rows={3} value={contentEn} onChange={e => setContentEn(e.target.value)} />
+              <textarea aria-label="Module content in English" className="w-full rounded border border-white/15 bg-white/5 px-3 py-2 whitespace-pre-wrap" rows={3} value={contentEn} onChange={e => setContentEn(e.target.value)} />
               <label className="mb-1 block text-sm text-gray-300">Content (Amharic)</label>
-              <textarea aria-label="Module content in Amharic" className="w-full rounded border border-white/15 bg-white/5 px-3 py-2" rows={3} value={contentAm} onChange={e => setContentAm(e.target.value)} />
+              <textarea aria-label="Module content in Amharic" className="w-full rounded border border-white/15 bg-white/5 px-3 py-2 whitespace-pre-wrap" rows={3} value={contentAm} onChange={e => setContentAm(e.target.value)} />
               <label className="mb-1 mt-2 block text-sm text-gray-300">YouTube URL</label>
               <input aria-label="Module video URL" className="w-full rounded border border-white/15 bg-white/5 px-3 py-2" placeholder="YouTube URL" value={videoUrl} onChange={e => setVideoUrl(e.target.value)} />
               <div className="mt-2 space-y-2">
