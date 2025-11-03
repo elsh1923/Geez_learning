@@ -12,14 +12,15 @@ interface Params {
 }
 
 export async function POST(req: NextRequest) {
-  try {
-    await dbConnect();
+  await dbConnect();
 
+  // ✅ Variables declared once for full-scope visibility
+  const { titleEn, titleAm, descriptionEn, descriptionAm, thumbnailUrl, thumbnailPublicId } = await req.json();
+
+  try {
     const user = await verifyAuth(req);
     if (!user) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     if (user.role !== "admin") return NextResponse.json({ message: "Forbidden: Admins only" }, { status: 403 });
-
-    const { titleEn, titleAm, descriptionEn, descriptionAm, thumbnailUrl, thumbnailPublicId } = await req.json();
 
     if (!titleEn || !titleAm || !descriptionEn || !descriptionAm) {
       return NextResponse.json({ message: "Title and description in both languages are required" }, { status: 400 });
@@ -32,19 +33,21 @@ export async function POST(req: NextRequest) {
       descriptionAm,
       thumbnail: thumbnailUrl || "",
       thumbnailPublicId: thumbnailPublicId || "",
-      createdBy: user._id,
+      createdBy: user._id, // ✅ user is validated above
     });
 
     return NextResponse.json({ message: "Course created successfully", course }, { status: 201 });
   } catch (error: any) {
     console.error("Create course error:", error);
-    
-    // Handle old 'title' index error (from previous schema version)
+
+    // ✅ Variables like titleEn are visible here
     if (error.code === 11000 && error.keyPattern?.title) {
       try {
-        // Attempt to drop the old index
         await Course.collection.dropIndex("title_1");
-        // Retry course creation
+
+        const retryUser = await verifyAuth(req);
+        if (!retryUser) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+
         const course = await Course.create({
           titleEn,
           titleAm,
@@ -52,18 +55,22 @@ export async function POST(req: NextRequest) {
           descriptionAm,
           thumbnail: thumbnailUrl || "",
           thumbnailPublicId: thumbnailPublicId || "",
-          createdBy: user._id,
+          createdBy: retryUser._id!, // ✅ fixed: added non-null assertion
         });
+
         return NextResponse.json({ message: "Course created successfully", course }, { status: 201 });
       } catch (retryError: any) {
-        // If dropping index fails, provide helpful error message
-        return NextResponse.json({ 
-          message: "Database index error. Please drop the old 'title_1' index from the courses collection manually: db.courses.dropIndex('title_1')",
-          error: retryError.message 
-        }, { status: 500 });
+        return NextResponse.json(
+          {
+            message:
+              "Database index error. Please drop the old 'title_1' index manually: db.courses.dropIndex('title_1')",
+            error: retryError.message,
+          },
+          { status: 500 }
+        );
       }
     }
-    
+
     return NextResponse.json({ message: error.message || "Internal server error" }, { status: 500 });
   }
 }
@@ -88,11 +95,7 @@ export async function PATCH(req: NextRequest) {
     if (descriptionEn) updateData.descriptionEn = descriptionEn;
     if (descriptionAm) updateData.descriptionAm = descriptionAm;
 
-    const course = await Course.findByIdAndUpdate(
-      courseId,
-      updateData,
-      { new: true }
-    );
+    const course = await Course.findByIdAndUpdate(courseId, updateData, { new: true });
 
     if (!course) return NextResponse.json({ message: "Course not found" }, { status: 404 });
 
@@ -120,7 +123,7 @@ export async function DELETE(req: NextRequest) {
 
     // Find all modules for this course
     const modules = await Module.find({ courseId });
-    const moduleIds = modules.map(m => m._id);
+    const moduleIds = modules.map((m) => m._id);
 
     // Delete all quizzes for these modules
     if (moduleIds.length > 0) {
@@ -136,7 +139,9 @@ export async function DELETE(req: NextRequest) {
     // Best-effort delete thumbnail from Cloudinary if we have a publicId
     const publicId = (course as any).thumbnailPublicId;
     if (publicId) {
-      try { await cloudinary.uploader.destroy(publicId); } catch {}
+      try {
+        await cloudinary.uploader.destroy(publicId);
+      } catch {}
     }
 
     return NextResponse.json({ message: "Course deleted successfully" });
