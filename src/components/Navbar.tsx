@@ -84,7 +84,7 @@ const Navbar = () => {
   };
   return (
     <nav className="sticky top-0 z-40 w-full backdrop-blur-md animate-fade-up">
-      <div className="w-full grid grid-cols-3 items-center border-b border-white/10 bg-[#0b0b0b]/80 px-6 py-3 shadow-[0_0_20px_rgba(255,215,0,0.06)]">
+      <div className="w-full flex items-center justify-between md:grid md:grid-cols-3 border-b border-white/10 bg-[#0b0b0b]/80 px-6 py-3 shadow-[0_0_20px_rgba(255,215,0,0.06)]">
         {/* Left: Brand */}
         <div className="flex items-center">
           <Link href="/" className="group relative flex items-center after:absolute after:inset-0 after:rounded after:bg-yellow-400/10 after:opacity-0 after:blur-[10px] after:transition-opacity after:duration-300 hover:after:opacity-100" aria-label={t.brand}>

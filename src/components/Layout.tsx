@@ -11,8 +11,8 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      {/* Remove default padding to let pages fill available space */}
-      <main className="flex-1 p-0">{children}</main>
+      {/* Mobile-only padding; no padding on larger screens */}
+      <main className="flex-1 p-4 sm:p-0">{children}</main>
       <Footer />
     </div>
   );
