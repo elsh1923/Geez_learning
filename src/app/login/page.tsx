@@ -71,7 +71,7 @@ export default function LoginPage() {
       <div className="pointer-events-none absolute -top-40 left-1/2 h-[60rem] w-[60rem] -translate-x-1/2 rounded-full bg-gradient-to-tr from-yellow-500/10 via-yellow-300/5 to-transparent blur-3xl" />
       <div className="pointer-events-none absolute bottom-[-20rem] right-[-10rem] h-[40rem] w-[40rem] rounded-full bg-gradient-to-tr from-yellow-400/15 via-amber-300/10 to-transparent blur-3xl" />
 
-      <div className="relative z-10 flex min-h-screen items-center justify-center px-6">
+      <div className="relative z-10 flex min-h-screen items-center justify-center px-0">
         <form className="animate-fade-up w-full max-w-md space-y-6 rounded-2xl border border-white/10 bg-white/5 p-8 text-gray-100 shadow-xl backdrop-blur-md" onSubmit={handleSubmit}>
           <div className="mb-2 text-center">
             <h2 className="bg-gradient-to-b from-gray-100 to-gray-300 bg-clip-text text-2xl font-bold tracking-tight text-transparent">{t.title}</h2>

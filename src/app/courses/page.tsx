@@ -103,7 +103,7 @@ export default function CoursesPage() {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-16">
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-0 py-16">
         <div className="mb-10 text-center">
           <h1 className="animate-fade-up bg-gradient-to-b from-gray-100 to-gray-300 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent drop-shadow sm:text-5xl">
             {t.heading}

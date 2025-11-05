@@ -1,3 +1,4 @@
+// src/components/Layout.tsx
 import React, { ReactNode } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -10,7 +11,8 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <main className="flex-1">{children}</main>
+      {/* Remove default padding to let pages fill available space */}
+      <main className="flex-1 p-0">{children}</main>
       <Footer />
     </div>
   );

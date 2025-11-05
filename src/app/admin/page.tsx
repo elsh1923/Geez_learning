@@ -73,7 +73,7 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-black via-[#0b0b0b] to-[#161616] text-gray-100">
       <Toaster position="top-right" />
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-6 py-8 md:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-0 py-8 md:grid-cols-4">
         {/* Sidebar */}
         <aside className="md:col-span-1 rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur">
           <h2 className="mb-4 bg-gradient-to-r from-yellow-300 to-yellow-500 bg-clip-text text-xl font-extrabold text-transparent">Admin</h2>
